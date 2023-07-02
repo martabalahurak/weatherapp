@@ -20,6 +20,18 @@ android {
         }
     }
 
+    flavorDimensions += "version"
+    productFlavors {
+        dev {
+            dimension "version"
+            buildConfigField "String", "API_BASE_URL", "\"https://api.openweathermap.org/\""
+        }
+        prod {
+            dimension "version"
+            buildConfigField "String", "API_BASE_URL", "\"https://api.openweathermap.org/\""
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
