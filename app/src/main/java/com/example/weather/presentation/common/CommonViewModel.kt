@@ -7,6 +7,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.withContext
 
 open class CommonViewModel(
     dispatchers: CoroutineDispatchers,
@@ -34,6 +35,17 @@ open class CommonViewModel(
     override fun onCleared() {
         ioScope.cancel()
         uiScope.cancel()
+    }
+
+    suspend fun <T> invokeCall(call: suspend () -> T): Either<Throwable, T> {
+        return withContext(ioScope.coroutineContext) {
+            try {
+                Either.Right(call.invoke())
+            } catch (throwable: Throwable) {
+                handleException(throwable)
+                Either.Left(throwable)
+            }
+        }
     }
 }
 

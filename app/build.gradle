@@ -25,10 +25,12 @@ android {
         dev {
             dimension "version"
             buildConfigField "String", "API_BASE_URL", "\"https://api.openweathermap.org/\""
+            buildConfigField "String", "API_ID", "\"19e49d921de06425974aead1955c9e5b\""
         }
         prod {
             dimension "version"
             buildConfigField "String", "API_BASE_URL", "\"https://api.openweathermap.org/\""
+            buildConfigField "String", "API_ID", "\"19e49d921de06425974aead1955c9e5b\""
         }
     }
 
