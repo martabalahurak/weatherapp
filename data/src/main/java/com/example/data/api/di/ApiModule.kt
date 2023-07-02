@@ -6,6 +6,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 
 val apiModule = module {
-    factory<ForecastApi> { ForecastApiImpl() }
+    factory<ForecastApi> { ForecastApiImpl(get(), get()) }
     single { HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY } }
 }
